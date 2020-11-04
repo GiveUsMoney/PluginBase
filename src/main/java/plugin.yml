@@ -1,3 +1,10 @@
+api: ""
 name: DamageImmuner
-version: 1.0.0
+version: "1.0"
+description: Damage Immuner
+
 main: com.roharui.mc.App
+
+commands:
+  dim:
+    description: for the test
