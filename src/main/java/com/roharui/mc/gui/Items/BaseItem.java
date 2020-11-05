@@ -1,18 +1,23 @@
 package com.roharui.mc.gui.Items;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 import org.bukkit.Material;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class BaseItem {
     private Material material;
     private String name;
     private String[] lore;
+    private Consumer<Event> handClick;
 
     public ItemStack createGuiItem() {
         final ItemStack item = new ItemStack(material, 1);
