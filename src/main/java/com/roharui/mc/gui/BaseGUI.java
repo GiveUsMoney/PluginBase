@@ -1,15 +1,14 @@
 package com.roharui.mc.gui;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.Event;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
 
 import com.roharui.mc.gui.Items.BaseItem;
+import com.roharui.mc.gui.Items.BoolItem;
+import com.roharui.mc.gui.Items.CloseItem;
 
 public class BaseGUI {
     private int INV_LINE = 1;
@@ -18,18 +17,11 @@ public class BaseGUI {
 
     public static HashMap<Integer, BaseItem> items = new HashMap<>(){
         private static final long serialVersionUID = 1L;
-
         {
-        put(8, new BaseItem(
-            Material.ENDER_EYE, 
-            "테스트", 
-            new String[]{"이건 테스트입니다.", "잘 됬으면 좋겠다."},
-            (Event e) -> {
-                InventoryClickEvent ev = (InventoryClickEvent) e;
-                ev.getView().close();
-            }
-        ));
-    }};
+            put(0, BoolItem.getInstance());
+            put(8, new CloseItem());
+        }
+    };
 
     public BaseGUI(){
         inv = Bukkit.createInventory(null, INV_LINE * 9, INV_TITLE);
@@ -49,7 +41,7 @@ public class BaseGUI {
 
     private void addItem(){
         for(Integer i : items.keySet()) {
-            inv.setItem(i, items.get(i).createGuiItem());
+            inv.setItem(i, items.get(i).getItem());
         }
     }
 }

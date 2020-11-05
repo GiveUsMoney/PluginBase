@@ -20,6 +20,8 @@ public class AppEvent implements Listener{
     public void onInventory(InventoryClickEvent e){
         InventoryView inv = e.getView();
 
+        if (e.getCurrentItem() == null) return;
+
         int x = inv.getInventory(0).getSize();
 
         if(inv.getItem(x - 1).getType().equals(Material.ENDER_EYE) && 

@@ -6,11 +6,12 @@ import org.bukkit.entity.Player;
 
 public class TestCommand extends BaseCommand{
 
+    private BaseGUI gui = new BaseGUI();
+
     @Override
     void empty(Player p){
         // Do not put op Command in here
         // p.sendMessage("arg is Empty");
-        BaseGUI gui = new BaseGUI();
         gui.open(p);
     }
 

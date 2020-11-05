@@ -8,18 +8,19 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor
-@Getter
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
 public class BaseItem {
-    private Material material;
-    private String name;
-    private String[] lore;
-    private Consumer<Event> handClick;
+    protected ItemStack item;
+    protected Consumer<Event> handClick;
 
-    public ItemStack createGuiItem() {
+    public BaseItem(Material material, String name, String[] lore, Consumer<Event> handClick){
+        this.item = createGuiItem(material, name, lore);
+    }
+
+    protected ItemStack createGuiItem(Material material, String name, String[] lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
 
