@@ -18,6 +18,7 @@ public class BaseItem {
 
     public BaseItem(Material material, String name, String[] lore, Consumer<Event> handClick){
         this.item = createGuiItem(material, name, lore);
+        this.handClick = handClick;
     }
 
     protected ItemStack createGuiItem(Material material, String name, String[] lore) {

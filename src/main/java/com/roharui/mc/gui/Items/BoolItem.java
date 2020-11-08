@@ -1,15 +1,18 @@
 package com.roharui.mc.gui.Items;
 
 import com.roharui.mc.App;
+import com.roharui.mc.data.DataManager;
+import com.roharui.mc.data.ImmunData;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class BoolItem extends BaseItem {
-    private boolean flag = true;
+    private boolean flag = false;
     private static BoolItem self = null;
 
     public static BoolItem getInstance(){
@@ -22,13 +25,13 @@ public class BoolItem extends BaseItem {
     private BoolItem(){
         super();
 
-        App.logger.info("bool item created");
-
-        this.item = getOnItem();
+        this.item = flag ? getOnItem() : getOffItem();
         this.handClick = (Event e) -> {
             InventoryClickEvent ev = (InventoryClickEvent) e;
-            flag = !flag;
-            ev.setCurrentItem(flag ? getOnItem() : getOffItem());
+            ImmunData imm = DataManager.ImmunMap.get((Player)ev.getWhoClicked());
+            imm.setTest(!imm.isTest());
+            ev.setCurrentItem(imm.isTest() ? getOnItem() : getOffItem());
+            item = imm.isTest() ? getOnItem() : getOffItem();
         };
     }
 

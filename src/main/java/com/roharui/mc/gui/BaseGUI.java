@@ -19,17 +19,18 @@ public class BaseGUI {
         private static final long serialVersionUID = 1L;
         {
             put(0, BoolItem.getInstance());
-            put(8, new CloseItem());
         }
     };
 
     public BaseGUI(){
+        BaseGUI.items.put((this.INV_LINE * 9) - 1, new CloseItem());
         inv = Bukkit.createInventory(null, INV_LINE * 9, INV_TITLE);
     }
 
     public BaseGUI(int inv_line, String inv_title){
         this.INV_LINE = inv_line;
         this.INV_TITLE = inv_title;
+        BaseGUI.items.put((this.INV_LINE * 9) - 1, new CloseItem());
         inv = Bukkit.createInventory(null, INV_LINE * 9, INV_TITLE);
     }
     
