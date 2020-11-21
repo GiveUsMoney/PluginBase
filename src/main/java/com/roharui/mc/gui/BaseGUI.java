@@ -12,7 +12,7 @@ import com.roharui.mc.gui.Items.CloseItem;
 
 public class BaseGUI {
     private int INV_LINE = 1;
-    private String INV_TITLE = "BaseGUI";
+    private String INV_TITLE = this.getClass().getName();
     private final Inventory inv;
 
     public static HashMap<Integer, BaseItem> items = new HashMap<>(){

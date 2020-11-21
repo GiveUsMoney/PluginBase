@@ -1,8 +1,11 @@
 package com.roharui.mc;
 
+import java.util.HashMap;
+
 import com.roharui.mc.data.DataManager;
 import com.roharui.mc.data.ImmunData;
 import com.roharui.mc.gui.BaseGUI;
+import com.roharui.mc.gui.Items.BaseItem;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -39,7 +42,9 @@ public class AppEvent implements Listener{
             inv.getTitle().contains("GUI"))
         {
             try {
-                BaseGUI.items.get(e.getRawSlot()).getHandClick().accept(e);
+                HashMap<Integer, ? extends BaseItem> hashmap = (HashMap<Integer, ? extends BaseItem>) Class
+                        .forName("com.roharui.mc.gui." + inv.getTitle()).getField("items").get(null);
+                hashmap.get(e.getRawSlot()).getHandClick().accept(e);
                 e.setCancelled(true);
             } catch (Exception err) {
                 err.printStackTrace();
