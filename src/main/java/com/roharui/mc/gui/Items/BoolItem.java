@@ -1,6 +1,5 @@
 package com.roharui.mc.gui.Items;
 
-import com.roharui.mc.App;
 import com.roharui.mc.data.DataManager;
 import com.roharui.mc.data.ImmunData;
 
