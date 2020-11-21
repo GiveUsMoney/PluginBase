@@ -14,6 +14,9 @@ public class BoolItem extends BaseItem {
     private boolean flag = false;
     private static BoolItem self = null;
 
+    protected ItemStack onItem;
+    protected ItemStack offItem;
+
     public static BoolItem getInstance(){
         if(BoolItem.self == null){
             BoolItem.self = new BoolItem();
@@ -24,21 +27,16 @@ public class BoolItem extends BaseItem {
     private BoolItem(){
         super();
 
-        this.item = flag ? getOnItem() : getOffItem();
+        onItem = createGuiItem(Material.REDSTONE_BLOCK, ChatColor.WHITE + "끄기", new String[]{ChatColor.RED + "현재는 켜져 있는 상태입니다."});
+        offItem = createGuiItem(Material.STONE, ChatColor.WHITE + "켜기", new String[]{ChatColor.RED + "현재는 꺼져 있는 상태입니다."});
+
+        this.item = flag ? onItem : offItem;
         this.handClick = (Event e) -> {
             InventoryClickEvent ev = (InventoryClickEvent) e;
             ImmunData imm = DataManager.ImmunMap.get((Player)ev.getWhoClicked());
             imm.setTest(!imm.isTest());
-            ev.setCurrentItem(imm.isTest() ? getOnItem() : getOffItem());
-            item = imm.isTest() ? getOnItem() : getOffItem();
+            ev.setCurrentItem(imm.isTest() ? onItem : offItem);
+            item = imm.isTest() ? onItem : offItem;
         };
-    }
-
-    private ItemStack getOnItem(){
-        return createGuiItem(Material.REDSTONE_BLOCK, ChatColor.WHITE + "끄기", new String[]{ChatColor.RED + "현재는 켜져 있는 상태입니다."});
-    }
-
-    private ItemStack getOffItem(){
-        return createGuiItem(Material.STONE, ChatColor.WHITE + "켜기", new String[]{ChatColor.RED + "현재는 꺼져 있는 상태입니다."});
     }
 }
