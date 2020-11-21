@@ -38,7 +38,7 @@ public class BaseCommand {
         }
 
         if(p.isOp()){
-            m.invoke(this, p);
+            m.invoke(this, p, args);
             return true;
         }
 
@@ -46,7 +46,7 @@ public class BaseCommand {
             return false;
         }
 
-        m.invoke(this, p);
+        m.invoke(this, p, args);
         return true;
     }
 

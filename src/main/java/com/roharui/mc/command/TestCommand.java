@@ -21,12 +21,12 @@ public class TestCommand extends BaseCommand{
     }
 
     @CommandArgs(args="go")
-    void ggg(Player p){
+    void ggg(Player p, String[] args){
         p.sendMessage("It Work.");
     }
 
     @CommandArgs(args="Debug", op=true)
-    void debug(Player p){
+    void debug(Player p, String[] args){
 
     }
 
