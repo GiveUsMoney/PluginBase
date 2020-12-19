@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import com.roharui.mc.data.DataManager;
 import com.roharui.mc.data.ImmunData;
-import com.roharui.mc.gui.BaseGUI;
 import com.roharui.mc.gui.Items.BaseItem;
 
 import org.bukkit.Material;
@@ -43,7 +42,7 @@ public class AppEvent implements Listener{
         {
             try {
                 HashMap<Integer, ? extends BaseItem> hashmap = (HashMap<Integer, ? extends BaseItem>) Class
-                        .forName("com.roharui.mc.gui." + inv.getTitle()).getField("items").get(null);
+                        .forName(inv.getTitle()).getField("items").get(null);
                 hashmap.get(e.getRawSlot()).getHandClick().accept(e);
                 e.setCancelled(true);
             } catch (Exception err) {
