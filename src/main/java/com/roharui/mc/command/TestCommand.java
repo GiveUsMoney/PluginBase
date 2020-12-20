@@ -1,9 +1,6 @@
 package com.roharui.mc.command;
 
-import java.util.logging.Logger;
-
 import com.roharui.mc.data.DataManager;
-// import com.roharui.mc.gui.BaseGUI;
 
 import org.bukkit.entity.Player;
 
@@ -13,10 +10,6 @@ public class TestCommand extends BaseCommand{
 
     @Override
     void empty(Player p){
-        // Do not put op Command in here
-        // p.sendMessage("arg is Empty");
-        // BaseGUI gui = dm.getGUI(p, "BaseGUI");
-        // Logger.getLogger("Minecraft").info(gui.items.)
         dm.openGUI(p, "BaseGUI");
     }
 
@@ -32,7 +25,6 @@ public class TestCommand extends BaseCommand{
 
     @CommandArgs(args="Debug", op=true)
     void debug(Player p, String[] args){
-
+        dm.openGUI(p, "OpGUI");
     }
-
 }

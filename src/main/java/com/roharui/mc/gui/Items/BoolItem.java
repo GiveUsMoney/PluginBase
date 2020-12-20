@@ -23,15 +23,8 @@ public class BoolItem extends BaseItem {
     @Override
     public void handClick(Event e){
         InventoryClickEvent ev = (InventoryClickEvent) e;
-        // Player p = (Player)ev.getWhoClicked();
-        // ImmunData imm = DataManager.getInstance().ImmunMap.get(p.getUniqueId().toString());
-        // imm.setTest(!imm.isTest());
-        // ev.setCurrentItem(imm.isTest() ? onItem : offItem);
-        // item = imm.isTest() ? onItem : offItem;
-
         this.flag = !this.flag;
         this.item = flag ? onItem : offItem;
         ev.setCurrentItem(this.createGuiItem());
-
     }
 }
