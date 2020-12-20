@@ -1,17 +1,20 @@
 package com.roharui.mc.gui.Items;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
-public class BoolItem extends BaseItem {
+public class ModeItem extends BaseItem {
     private boolean flag = false;
 
     protected ItemInfo onItem;
     protected ItemInfo offItem;
 
-    public BoolItem(){
+    public ModeItem(){
         super();
 
         onItem = new ItemInfo(Material.REDSTONE_BLOCK, ChatColor.WHITE + "끄기", new String[]{ChatColor.RED + "현재는 켜져 있는 상태입니다."});
@@ -23,15 +26,22 @@ public class BoolItem extends BaseItem {
     @Override
     public void handClick(Event e){
         InventoryClickEvent ev = (InventoryClickEvent) e;
-        // Player p = (Player)ev.getWhoClicked();
-        // ImmunData imm = DataManager.getInstance().ImmunMap.get(p.getUniqueId().toString());
-        // imm.setTest(!imm.isTest());
-        // ev.setCurrentItem(imm.isTest() ? onItem : offItem);
-        // item = imm.isTest() ? onItem : offItem;
+        Player p = (Player)ev.getWhoClicked();
 
-        this.flag = !this.flag;
-        this.item = flag ? onItem : offItem;
+        if(p.getGameMode() == GameMode.CREATIVE){
+            p.setGameMode(GameMode.SURVIVAL);
+        } else {
+            p.setGameMode(GameMode.CREATIVE);
+        }
+
+        this.item = p.getGameMode() == GameMode.CREATIVE ? onItem : offItem;
         ev.setCurrentItem(this.createGuiItem());
 
+    }
+
+    @Override
+    public ItemStack showItem(Player p) {
+        this.item = p.getGameMode() == GameMode.CREATIVE ? onItem : offItem;
+        return createGuiItem();
     }
 }
