@@ -12,26 +12,18 @@ import com.roharui.mc.gui.Items.CloseItem;
 
 public class BaseGUI {
     private int INV_LINE = 1;
-    private String INV_TITLE = this.getClass().getName();
     private final Inventory inv;
 
-    public static HashMap<Integer, BaseItem> items = new HashMap<>(){
+    public HashMap<Integer, BaseItem> items = new HashMap<>(){
         private static final long serialVersionUID = 1L;
         {
-            put(0, BoolItem.getInstance());
+            put(0, new BoolItem());
         }
     };
 
-    public BaseGUI(){
-        BaseGUI.items.put((this.INV_LINE * 9) - 1, new CloseItem());
-        inv = Bukkit.createInventory(null, INV_LINE * 9, INV_TITLE);
-    }
-
     public BaseGUI(int inv_line, String inv_title){
-        this.INV_LINE = inv_line;
-        this.INV_TITLE = inv_title;
-        BaseGUI.items.put((this.INV_LINE * 9) - 1, new CloseItem());
-        inv = Bukkit.createInventory(null, INV_LINE * 9, INV_TITLE);
+        this.items.put((inv_line * 9) - 1, new CloseItem());
+        inv = Bukkit.createInventory(null, INV_LINE * 9, inv_title);
     }
     
     //open 메소드에 플레이어를 매개변수로 받고 정해진(상속받은) GUI를 열어줌

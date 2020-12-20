@@ -1,7 +1,6 @@
 package com.roharui.mc.gui.Items;
 
 import java.util.Arrays;
-import java.util.function.Consumer;
 
 import org.bukkit.Material;
 import org.bukkit.event.Event;
@@ -10,15 +9,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 public class BaseItem {
     protected ItemStack item;
-    protected Consumer<Event> handClick;
 
-    public BaseItem(Material material, String name, String[] lore, Consumer<Event> handClick){
+    public BaseItem(Material material, String name, String[] lore){
         this.item = createGuiItem(material, name, lore);
-        this.handClick = handClick;
     }
 
     protected ItemStack createGuiItem(Material material, String name, String[] lore) {
@@ -35,4 +33,6 @@ public class BaseItem {
 
         return item;
     }
+
+    public void handClick(Event e){}
 }

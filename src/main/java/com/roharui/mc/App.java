@@ -2,8 +2,6 @@ package com.roharui.mc;
 
 import java.util.logging.Logger;
 
-import com.roharui.mc.data.DataManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,7 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class App extends JavaPlugin{
 
     public static final Logger logger = Logger.getLogger("Minecraft");
-    public static DataManager dm = new DataManager();
 
     @Override
     public void onEnable() {
