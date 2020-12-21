@@ -1,13 +1,14 @@
 package com.roharui.mc.data;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import com.roharui.mc.gui.BaseGUI;
 
-import org.bukkit.entity.Player;
+import org.bukkit.entity.HumanEntity;
 
 public class DataManager {
-    public HashMap<String, ImmunData> ImmunMap = new HashMap<String, ImmunData>();
+    public HashMap<String, PlayerData> ImmunMap = new HashMap<String, PlayerData>();
 
     private static DataManager instance;
 
@@ -18,12 +19,22 @@ public class DataManager {
         return DataManager.instance;
     }
 
-    public BaseGUI getGUI(Player p, String name){
+    public PlayerData getPlayerData(HumanEntity p){
         String uuid = p.getUniqueId().toString();
-        return this.ImmunMap.get(uuid).GuiMapper.get(name);
+        return this.ImmunMap.get(uuid);
     }
 
-    public void openGUI(Player p, String name){
-        this.getGUI(p, name).open(p);
+    public BaseGUI getGUI(HumanEntity p, String name){
+        String uuid = p.getUniqueId().toString();
+        return this.ImmunMap.get(uuid).getGuiMapper().get(name);
+    }
+
+    public void openGUI(HumanEntity p, String name){
+        BaseGUI gui = this.getGUI(p, name);
+        this.getPlayerData(p).getGuiHistory().push(gui);
+        this.getPlayerData(p).getGuiHistory().push(gui);
+        int size = this.getPlayerData(p).getGuiHistory().size();
+        Logger.getLogger("Minecraft").info(Integer.toString(size));
+        gui.open(p);
     }
 }
