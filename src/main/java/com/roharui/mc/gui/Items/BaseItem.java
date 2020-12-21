@@ -3,7 +3,7 @@ package com.roharui.mc.gui.Items;
 import java.util.Arrays;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -46,7 +46,7 @@ public class BaseItem {
     }
 
     public void handClick(Event e){}
-    public ItemStack showItem(Player p){
+    public ItemStack showItem(HumanEntity p){
         return createGuiItem();
     }
 }

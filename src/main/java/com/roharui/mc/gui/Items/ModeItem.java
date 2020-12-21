@@ -3,7 +3,7 @@ package com.roharui.mc.gui.Items;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +26,7 @@ public class ModeItem extends BaseItem {
     @Override
     public void handClick(Event e){
         InventoryClickEvent ev = (InventoryClickEvent) e;
-        Player p = (Player)ev.getWhoClicked();
+        HumanEntity p = ev.getWhoClicked();
 
         if(p.getGameMode() == GameMode.CREATIVE){
             p.setGameMode(GameMode.SURVIVAL);
@@ -40,7 +40,7 @@ public class ModeItem extends BaseItem {
     }
 
     @Override
-    public ItemStack showItem(Player p) {
+    public ItemStack showItem(HumanEntity p) {
         this.item = p.getGameMode() == GameMode.CREATIVE ? onItem : offItem;
         return createGuiItem();
     }
